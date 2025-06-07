@@ -1,0 +1,110 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Enforcing Dark Mode as primary */
+    --background: 240 10% 3.9%; /* Darker background for dark mode */
+    --foreground: 0 0% 95%; /* Lighter text for dark mode */
+
+    --card: 240 10% 6.9%; /* Slightly lighter dark for cards */
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 271 100% 60%; /* Brighter Indigo */
+    --primary-foreground: 0 0% 98%; /* Text on primary */
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 240 3.7% 15.9%; /* Darker muted */
+    --muted-foreground: 0 0% 65%; /* Lighter muted text */
+
+    --accent: 180 100% 55%; /* Slightly adjusted Cyan */
+    --accent-foreground: 271 100% 15%; /* Darker, indigo-based text for contrast on Cyan */
+
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 20%; /* Slightly lighter border for dark */
+    --input: 240 3.7% 15.9%;
+    --ring: 180 100% 65%; /* Brighter accent for rings */
+
+    --radius: 0.75rem;
+
+    /* Chart colors - dark mode friendly */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Sidebar variables - dark mode */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 271 100% 70%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 20%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 25%;
+    --sidebar-ring: 180 100% 65%;
+
+    /* REMOVED Global Gradient Colors */
+    /* --gradient-purple-top: 271 100% 30%; */
+    /* --gradient-blue-middle: 200 100% 45%; */
+    /* --gradient-black-bottom: 240 5% 5%; */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    /* REMOVED background gradient and attachment */
+    min-height: 100vh; /* Ensure body covers full viewport height */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-700 { animation-delay: 700ms; }
+  .animation-delay-1000 { animation-delay: 1000ms; }
+
+  /* Custom scrollbar for better aesthetics in dark mode */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent; /* Keep track transparent */
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/70;
+  }
+
+  .text-gradient-primary-accent {
+    @apply bg-gradient-to-r from-primary via-purple-500 to-accent bg-clip-text text-transparent;
+  }
+}
