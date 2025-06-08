@@ -64,7 +64,7 @@ const Footer: FC = () => {
                  <li key={link.href}><Link href={link.href} className="text-neutral-300 hover:text-primary transition-colors">{link.label}</Link></li>
               ))}
                <li><a href="mailto:info@aeternix.com" className="text-neutral-300 hover:text-primary transition-colors">info@aeternix.com</a></li>
-              <li><a href="tel:+1234567890" className="text-neutral-300 hover:text-primary transition-colors">+1 (234) 567-890</a></li>
+              <li><a href="tel:+1234567890" className="text-neutral-300 hover:text-primary transition-colors">+63 (965) 490-4087</a></li>
             </ul>
           </div>
 

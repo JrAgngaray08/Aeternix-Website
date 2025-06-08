@@ -176,7 +176,7 @@ export default function HomePage() {
                     size="lg"
                     className="bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground text-base sm:text-lg px-8 py-6 sm:py-7 w-full sm:w-auto shadow-lg hover:shadow-xl hover:shadow-accent/60 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <Link href="https://cal.com/aeternix/strategy-call-30-minutes-discovery-call" target="_blank" rel="noopener noreferrer">
+                    <Link href="/#contact">
                       Book a Free Strategy Call
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
@@ -206,7 +206,7 @@ export default function HomePage() {
       {/* Showcase Video Section */}
        <section id="showcase-video" className="py-16 md:py-20 lg:py-24">
          <ShowcaseVideoPlayer
-           videoSrc="/video/Aeternix_Landscape.mp4"
+           videoSrc="/videos/Aeternix_SoftLaunch_Landscape.mp4"
            posterSrc="https://placehold.co/1280x720.png"
          />
       </section>
@@ -230,7 +230,7 @@ export default function HomePage() {
                 <p className="text-md text-primary-foreground/70 mb-4">Want to build something timeless?</p>
                 <div className="flex items-center justify-center gap-4">
                 <Button variant="link" asChild className="text-accent text-md hover:text-accent/80">
-                    <Link href="https://cal.com/aeternix/strategy-call-30-minutes-discovery-call" target="_blank" rel="noopener noreferrer">Let’s Talk</Link>
+                    <Link href="/#contact">Let’s Talk</Link>
                 </Button>
                 <span className="text-primary-foreground/50">|</span>
                 <Button variant="link" asChild className="text-accent text-md hover:text-accent/80">
@@ -242,7 +242,7 @@ export default function HomePage() {
       </section>
       
       {/* Founder Carousel Section */}
-      <section id="founders-showcase" className="py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background via-neutral-900 to-neutral-950 text-foreground">
+      <section id="founders-showcase" className="py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background via-[hsl(250_35%_4%)] to-[hsl(250_30%_2%)] text-foreground">
         <div className="container">
           <SectionTitle
             title="Meet Our Architects of Growth"
@@ -351,7 +351,7 @@ export default function HomePage() {
               variant="outline" 
               className="text-primary border-primary hover:bg-primary/10 hover:shadow-accent-glow hover:-translate-y-0.5 transition-all duration-300"
             >
-              <Link href="https://cal.com/aeternix/strategy-call-30-minutes-discovery-call" target="_blank" rel="noopener noreferrer">Request a Custom Quote</Link>
+              <Link href="https://cal.com/aeternix/30-minutes-intro-call" target="_blank" rel="noopener noreferrer">Request a Custom Quote</Link>
             </Button>
           </div>
         </div>

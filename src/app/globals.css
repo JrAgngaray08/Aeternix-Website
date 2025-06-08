@@ -6,13 +6,13 @@
 @layer base {
   :root {
     /* Enforcing Dark Mode as primary */
-    --background: 240 10% 3.9%; /* Darker background for dark mode */
+    --background: 250 40% 5%; /* Made darker blue/purple */
     --foreground: 0 0% 95%; /* Lighter text for dark mode */
 
-    --card: 240 10% 6.9%; /* Slightly lighter dark for cards */
+    --card: 250 40% 8%; /* Adjusted based on new background */
     --card-foreground: 0 0% 95%;
 
-    --popover: 240 10% 3.9%;
+    --popover: 250 40% 5%; /* Adjusted based on new background */
     --popover-foreground: 0 0% 95%;
 
     --primary: 271 100% 60%; /* Brighter Indigo */
@@ -108,3 +108,4 @@
     @apply bg-gradient-to-r from-primary via-purple-500 to-accent bg-clip-text text-transparent;
   }
 }
+
