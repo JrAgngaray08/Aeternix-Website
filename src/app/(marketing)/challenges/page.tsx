@@ -1,7 +1,7 @@
 
 import SectionTitle from '@/components/shared/SectionTitle';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Brain, Briefcase, FileWarning, BarChart, AlertTriangle, Zap, ShieldCheck, HelpCircle, Users, Target } from 'lucide-react';
+import { Brain, Briefcase, FileWarning, BarChart, AlertTriangle, Zap, ShieldCheck, HelpCircle, Users, Target, UsersRound } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
