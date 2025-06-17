@@ -242,7 +242,7 @@ export default function HomePage() {
       </section>
       
       {/* Founder Carousel Section */}
-      <section id="founders-showcase" className="py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background via-[hsl(250_35%_4%)] to-[hsl(250_30%_2%)] text-foreground">
+      <section id="founders-showcase" className="py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background via-[hsl(250_35%_7%)] to-[hsl(250_30%_4%)] text-foreground">
         <div className="container">
           <SectionTitle
             title="Meet Our Architects of Growth"

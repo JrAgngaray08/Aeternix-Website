@@ -6,13 +6,13 @@
 @layer base {
   :root {
     /* Enforcing Dark Mode as primary */
-    --background: 250 40% 5%; /* Made darker blue/purple */
+    --background: 250 40% 10%; /* Lightened dark blue/purple */
     --foreground: 0 0% 95%; /* Lighter text for dark mode */
 
-    --card: 250 40% 8%; /* Adjusted based on new background */
+    --card: 250 40% 13%; /* Adjusted based on new background */
     --card-foreground: 0 0% 95%;
 
-    --popover: 250 40% 5%; /* Adjusted based on new background */
+    --popover: 250 40% 10%; /* Adjusted based on new background */
     --popover-foreground: 0 0% 95%;
 
     --primary: 271 100% 60%; /* Brighter Indigo */
