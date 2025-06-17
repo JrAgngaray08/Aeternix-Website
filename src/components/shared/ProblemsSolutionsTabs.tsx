@@ -3,35 +3,51 @@
 
 import { useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Brain, FileWarning, BarChart as LucideBarChart, AlertTriangle, Zap, ShieldCheck, PlayCircle, Lightbulb } from 'lucide-react';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  Brain, FileWarning, BarChart as LucideBarChart, AlertTriangle, Zap, ShieldCheck, PlayCircle, Lightbulb,
+  Compass, MegaphoneOff, MonitorX, TrendingDown, BarChartHorizontalBig, SlidersHorizontal,
+  Target, Sparkles, MousePointerClick, PieChart, Bot, TrendingUp, CheckCircle // Added TrendingUp
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Map icon names to actual Lucide components
 const iconMap: { [key: string]: LucideIcon } = {
   Brain,
-  // Briefcase, // Removed as per previous request
   FileWarning,
-  BarChart: LucideBarChart,
+  BarChart: LucideBarChart, // Alias for existing BarChart
   AlertTriangle,
   Zap,
   ShieldCheck,
   PlayCircle,
   Lightbulb,
+  Compass,
+  MegaphoneOff,
+  MonitorX,
+  TrendingDown,
+  BarChartHorizontalBig,
+  SlidersHorizontal,
+  Target,
+  Sparkles,
+  MousePointerClick,
+  TrendingUp: TrendingUp, 
+  PieChart,
+  Bot,
+  CheckCircle, // Kept CheckCircle as it was previously there, good for general use
 };
 
 type Problem = {
   id: string;
   title: string;
-  description: string;
-  iconName: string; // Changed from icon: LucideIcon
+  description: string; // This is the subheading
+  iconName: string;
 };
 
 type SolutionItem = {
-  title: string;
-  iconName: string; // Changed from icon: LucideIcon
-  items: string[];
   id: string;
+  title: string;
+  description: string; // This is the subheading
+  iconName: string;
 };
 
 interface ProblemsSolutionsTabsProps {
@@ -45,6 +61,12 @@ export default function ProblemsSolutionsTabs({ problems, solutions }: ProblemsS
   const tabButtonBaseClass = "px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 w-full sm:w-auto";
   const activeTabClass = "bg-primary/10 text-primary border border-primary shadow-md";
   const inactiveTabClass = "text-muted-foreground hover:text-primary-foreground hover:bg-muted/30";
+
+  const cardWrapperBaseClass = "group relative rounded-lg";
+  const cardWrapperHoverClass = "hover:p-[2px] hover:bg-gradient-to-r hover:from-primary hover:via-purple-500 hover:to-accent hover:animate-border-flow";
+  const cardInnerBaseClass = "bg-card/70 backdrop-blur-sm transition-shadow duration-300 ease-in-out flex flex-col text-card-foreground h-full";
+  const cardInnerHoverRadiusClass = "group-hover:rounded-[calc(var(--radius)-2px)]";
+
 
   return (
     <div className="w-full">
@@ -71,27 +93,32 @@ export default function ProblemsSolutionsTabs({ problems, solutions }: ProblemsS
       </div>
 
       {/* Content Area */}
-      <div className="relative min-h-[400px] p-6 sm:p-8 animate-fade-in">
+      <div className="relative min-h-[300px] p-4 sm:p-6 animate-fade-in"> {/* Adjusted min-height and padding */}
         {activeTab === 'problems' && (
           <div key="problems-content">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {problems.map((problem) => {
                 const IconComponent = iconMap[problem.iconName];
                 return (
-                  <Card
-                    key={problem.id}
-                    className="bg-card/70 backdrop-blur-sm hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col text-card-foreground"
+                  <div 
+                    key={problem.id} 
+                    className={cn(cardWrapperBaseClass, cardWrapperHoverClass)}
+                    style={{ backgroundSize: '400% 400%' }}
                   >
-                    <CardHeader className="flex flex-col items-center text-center gap-2 pb-4">
-                      <div className="p-3 bg-primary/10 rounded-lg mb-2">
-                        {IconComponent && <IconComponent className="w-8 h-8 text-primary shrink-0" />}
-                      </div>
-                      <div>
-                        <CardTitle className="font-headline text-xl leading-tight">{problem.title}</CardTitle>
-                        <p className="text-sm text-muted-foreground mt-1">{problem.description}</p>
-                      </div>
-                    </CardHeader>
-                  </Card>
+                    <Card
+                      className={cn(cardInnerBaseClass, cardInnerHoverRadiusClass)}
+                    >
+                      <CardHeader className="flex flex-col items-center text-center gap-2 pb-4 pt-6 flex-grow"> {/* Added flex-grow */}
+                        <div className="p-3 bg-primary/10 rounded-lg mb-2">
+                          {IconComponent && <IconComponent className="w-8 h-8 text-primary shrink-0" />}
+                        </div>
+                        <div className="flex flex-col flex-grow justify-center"> {/* Centering text vertically */}
+                          <CardTitle className="font-headline text-xl leading-tight">{problem.title}</CardTitle>
+                          <p className="text-sm text-muted-foreground mt-1 px-2">{problem.description}</p>
+                        </div>
+                      </CardHeader>
+                    </Card>
+                  </div>
                 );
               })}
             </div>
@@ -104,27 +131,25 @@ export default function ProblemsSolutionsTabs({ problems, solutions }: ProblemsS
               {solutions.map((solution) => {
                 const IconComponent = iconMap[solution.iconName];
                 return(
-                  <Card
-                    key={solution.id}
-                    className="bg-card/70 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300 ease-in-out flex flex-col text-card-foreground"
+                  <div 
+                    key={solution.id} 
+                    className={cn(cardWrapperBaseClass, cardWrapperHoverClass)}
+                    style={{ backgroundSize: '400% 400%' }}
                   >
-                    <CardHeader className="flex flex-col items-center text-center pb-4"> {/* Added flex flex-col */}
-                      <div className="p-3.5 bg-accent/10 rounded-full mb-3">
-                        {IconComponent && <IconComponent className="w-9 h-9 text-primary" />}
-                      </div>
-                      <CardTitle className="font-headline text-xl">{solution.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow text-center"> {/* Added text-center */}
-                      <ul className="space-y-1.5 text-sm text-muted-foreground inline-block text-left"> {/* Added inline-block text-left */}
-                        {solution.items.map(item => (
-                          <li key={item} className="flex items-start">
-                            <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 shrink-0" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
+                    <Card
+                      className={cn(cardInnerBaseClass, cardInnerHoverRadiusClass)}
+                    >
+                      <CardHeader className="flex flex-col items-center text-center gap-2 pb-4 pt-6 flex-grow"> {/* Added flex-grow */}
+                        <div className="p-3.5 bg-accent/10 rounded-full mb-3">
+                          {IconComponent && <IconComponent className="w-9 h-9 text-primary" />}
+                        </div>
+                        <div className="flex flex-col flex-grow justify-center"> {/* Centering text vertically */}
+                          <CardTitle className="font-headline text-xl leading-tight">{solution.title}</CardTitle>
+                          <p className="text-sm text-muted-foreground mt-1 px-2">{solution.description}</p>
+                        </div>
+                      </CardHeader>
+                    </Card>
+                  </div>
                 );
               })}
             </div>
@@ -134,3 +159,4 @@ export default function ProblemsSolutionsTabs({ problems, solutions }: ProblemsS
     </div>
   );
 }
+

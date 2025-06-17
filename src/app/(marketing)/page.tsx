@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import SectionTitle from '@/components/shared/SectionTitle';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Zap, Users, ArrowRight, Lightbulb, BarChart as LucideBarChart, UsersRound, Brain, AlertTriangle, FileWarning, ShieldCheck, Mail, Phone, MapPin, ShoppingCart, House, TrendingUp, FileWarningIcon, Wand2 } from 'lucide-react';
+import { CheckCircle, Zap, Users, ArrowRight, Lightbulb, BarChart as LucideBarChart, UsersRound, Brain, AlertTriangle, FileWarning, ShieldCheck, Mail, Phone, MapPin, ShoppingCart, House, TrendingUp, FileWarningIcon, Wand2, Compass, MegaphoneOff, MonitorX, TrendingDown, BarChartHorizontalBig, SlidersHorizontal, Target, Sparkles, MousePointerClick, PieChart, Bot } from 'lucide-react';
 import type { PricingTier, Founder } from '@/types';
 import { cn } from '@/lib/utils';
 // import ContactForm from './contact/ContactForm'; // Contact section is removed
@@ -15,44 +15,50 @@ import PricingTiersSection from '@/components/shared/PricingTiersSection';
 
 
 const problemsSolved = [
-  { title: "Strategic Confusion", description: "No roadmap. Random tactics. Shaky targeting.", iconName: "Brain", id: 'problem-strategic-confusion' },
-  { title: "Content Chaos", description: "You’re winging it with content. It shows.", iconName: "FileWarning", id: 'problem-content-chaos' },
-  { title: "No Insightful Metrics", description: "You don’t know what’s working. Just vibes.", iconName: "BarChart", id: 'problem-no-insightful-metrics' },
-  { title: "Outdated Marketing", description: "Your brand feels… meh. No innovation. No story.", iconName: "AlertTriangle", id: 'problem-outdated-marketing' },
-  { title: "Broken Tech", description: "Your funnel leaks. Your website’s outdated. Your data’s siloed.", iconName: "Zap", id: 'problem-broken-tech' },
-  { title: "Online Reputation Gaps", description: "No reviews. No presence. No trust.", iconName: "ShieldCheck", id: 'problem-reputation-gaps' }
+  { title: "No real strategy", description: "Struggling with unclear marketing direction or guessing what works? No roadmap = no results.", iconName: "Compass", id: 'problem-no-real-strategy' },
+  { title: "Drowning in content, but nothing converts", description: "You’re posting a lot, but your audience isn’t responding. No engagement, no ROI, just noise.", iconName: "MegaphoneOff", id: 'problem-content-no-converts' },
+  { title: "Website looks good but doesn’t sell", description: "A beautiful website means nothing if it can’t generate leads or sales. Design isn’t the same as conversion.", iconName: "MonitorX", id: 'problem-website-not-selling' },
+  { title: "Ads spend with no returns", description: "Tired of wasting budget on ads that don’t perform? If you can’t scale results, it’s not performance marketing.", iconName: "TrendingDown", id: 'problem-ads-no-returns' },
+  { title: "You have analytics—but they’re overwhelming", description: "You’re flooded with numbers but still don’t know what’s working. Data overload = zero clarity.", iconName: "BarChartHorizontalBig", id: 'problem-analytics-overload' },
+  { title: "No systems, no automation, everything is manual", description: "Your marketing team is burnt out doing repetitive tasks. Without automation, you can’t grow sustainably.", iconName: "SlidersHorizontal", id: 'problem-manual-processes' }
 ];
 
 const aeternixSolutions = [
   {
-    title: "Visibility & Demand",
-    iconName: "Zap",
-    items: ["Google + Meta Ads", "Local SEO & Maps Pack Domination", "Scroll-stopping Social Media"],
-    id: 'solution-visibility-demand'
+    title: "Built-for-you strategy",
+    description: "We create tailored marketing strategies that align with your brand goals and drive measurable growth.",
+    iconName: "Target",
+    id: 'solution-built-for-you-strategy'
   },
   {
-    title: "Content That Converts",
-    iconName: "PlayCircle",
-    items: ["Video walkthroughs, UGC, and influencers", "Website copy, emails, blogs, landing pages"],
-    id: 'solution-content-converts'
+    title: "Scroll-stopping content",
+    description: "We develop magnetic content that actually gets clicks, comments, and conversions.",
+    iconName: "Sparkles",
+    id: 'solution-scroll-stopping-content'
   },
   {
-    title: "Systems That Scale",
-    iconName: "BarChart",
-    items: ["CRM & funnel integration", "AI Automation and Chatbot"],
-    id: 'solution-systems-scale'
+    title: "Conversion-driven design",
+    description: "We design sleek, high-performing websites that turn visitors into customers.",
+    iconName: "MousePointerClick",
+    id: 'solution-conversion-driven-design'
   },
   {
-    title: "Strategy That Evolves",
-    iconName: "Lightbulb",
-    items: ["Monthly sprints", "Brand/audience alignment", "Scalable execution plans"],
-    id: 'solution-strategy-evolves'
+    title: "Performance marketing that actually performs",
+    description: "We run smart, ROI-focused ad campaigns that drive sales and scalable growth.",
+    iconName: "TrendingUp",
+    id: 'solution-performance-marketing-roi'
   },
   {
-    title: "Reputation Power",
-    iconName: "ShieldCheck",
-    items: ["Review campaigns", "Social listening + sentiment tracking"],
-    id: 'solution-reputation-power'
+    title: "Data you can actually use",
+    description: "We simplify your metrics into clean dashboards so you can track what matters and make better decisions.",
+    iconName: "PieChart",
+    id: 'solution-data-you-can-use'
+  },
+  {
+    title: "Automation that scales with you",
+    description: "We build systems that streamline your marketing, freeing up time and helping you scale effortlessly.",
+    iconName: "Bot",
+    id: 'solution-automation-scales'
   }
 ];
 
