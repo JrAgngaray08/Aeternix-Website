@@ -1,7 +1,7 @@
 
 import type { FC } from 'react';
 import Link from 'next/link';
-import { Zap, Linkedin, Twitter } from 'lucide-react'; // Removed Facebook, Instagram, Youtube as they are not in socialLinks
+import { Zap, Linkedin, Facebook } from 'lucide-react'; // Changed Twitter to Facebook
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -9,21 +9,20 @@ const Footer: FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { href: "#", label: "LinkedIn", icon: Linkedin },
-    { href: "#", label: "Twitter", icon: Twitter },
+    { href: "https://www.linkedin.com/company/aeternix", label: "LinkedIn", icon: Linkedin },
+    { href: "https://www.facebook.com/profile.php?id=61574416082145", label: "Facebook", icon: Facebook }, // Changed from Twitter to Facebook
   ];
 
   const quickLinks = [
     { href: '/#about-aeternix', label: 'About' },
-    { href: '/#aeternix-solution', label: 'Solutions' },
-    { href: '/#results-that-hit', label: 'Results' },
-    { href: '/#problems-we-solve', label: 'Challenges' },
+    { href: '/#founders-showcase', label: 'Team' },
+    { href: '/#lets-cut-to-the-chase', label: 'Challenges' },
     { href: '/#pricing', label: 'Pricing' },
     { href: '/ai-content-spark', label: 'AI Content Spark' },
   ];
 
   const legalLinks = [
-     { href: '/#contact', label: 'Contact Us' },
+     { href: '/contact', label: 'Contact Us' },
      { href: '/privacy-policy', label: 'Privacy Policy' },
      { href: '/terms-of-service', label: 'Terms of Service' },
   ];
@@ -63,23 +62,18 @@ const Footer: FC = () => {
               {legalLinks.map(link => (
                  <li key={link.href}><Link href={link.href} className="text-neutral-300 hover:text-primary transition-colors">{link.label}</Link></li>
               ))}
-               <li><a href="mailto:info@aeternix.com" className="text-neutral-300 hover:text-primary transition-colors">info@aeternix.com</a></li>
-              <li><a href="tel:+1234567890" className="text-neutral-300 hover:text-primary transition-colors">+63 (965) 490-4087</a></li>
+               <li><a href="mailto:aeternix.marketing@gmail.com" className="text-neutral-300 hover:text-primary transition-colors">aeternix.marketing@gmail.com</a></li>
+              <li><a href="tel:+1234567890" className="text-neutral-300 hover:text-primary transition-colors">+1 (234) 567-890</a></li>
             </ul>
           </div>
 
           {/* Column 4: Call to Action & Social */}
           <div>
              <h3 className="text-lg font-semibold text-neutral-100 mb-4 font-headline">Let’s build something legendary.</h3>
-             <p className="text-sm mb-4 text-neutral-300">Subscribe for insights, or connect with us.</p>
-             <form className="flex gap-2 mb-6">
-                <Input type="email" placeholder="your.email@example.com" className="bg-input border-border text-sm" aria-label="Email for newsletter"/>
-                <Button type="submit" size="sm" variant="outline" className="text-primary border-primary hover:bg-primary/10">Subscribe</Button>
-             </form>
             {socialLinks.length > 0 && (
                 <div className="flex space-x-3">
                 {socialLinks.map(social => (
-                    <Link key={social.label} href={social.href} aria-label={social.label} className="text-neutral-400 hover:text-primary transition-colors">
+                    <Link key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} className="text-neutral-400 hover:text-primary transition-colors">
                     <social.icon size={20} />
                     </Link>
                 ))}
@@ -98,3 +92,4 @@ const Footer: FC = () => {
 };
 
 export default Footer;
+

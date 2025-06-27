@@ -65,9 +65,6 @@ const FounderCarousel: React.FC<FounderCarouselProps> = ({ founders }) => {
     return null;
   }
   
-  // Determine if arrows should be shown
-  // Show if more founders than can be displayed at once (1 on mobile, 3 on desktop),
-  // or if there are at least 2 founders (to allow navigation between them).
   const showArrows = founders.length > 1;
 
 
@@ -76,17 +73,13 @@ const FounderCarousel: React.FC<FounderCarouselProps> = ({ founders }) => {
       <div className={cn(
         "flex items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8",
       )}>
-        {visibleItems.map(({ founder, status, keyId }) => (
-          <div
-            key={keyId} 
-            className={cn(
-              'transition-all duration-500 ease-in-out',
-              'w-[160px] xs:w-[180px] sm:w-[200px] md:w-[220px] lg:w-[260px]', 
-              status === 'active' ? 'opacity-100 scale-100 z-10' : 'opacity-50 scale-90',
-              (status === 'prev' || status === 'next') && !isMobile ? 'block' : status === 'active' ? 'block' : 'hidden',
-            )}
-          >
-            <div className="relative aspect-[9/16] bg-card/60 backdrop-blur-md border border-border/20 rounded-xl shadow-xl overflow-hidden group">
+        {visibleItems.map(({ founder, status, keyId }) => {
+          const isActive = status === 'active';
+          const isSideCard = (status === 'prev' || status === 'next') && !isMobile;
+          const isVisible = isActive || isSideCard;
+
+          const founderCardInnerContent = (
+            <>
               <Image
                 src={founder.imageUrl}
                 alt={`${founder.name} - ${founder.role}`}
@@ -100,9 +93,42 @@ const FounderCarousel: React.FC<FounderCarouselProps> = ({ founders }) => {
                 <h3 className="font-headline text-base sm:text-lg font-semibold truncate">{founder.name}</h3>
                 <p className="text-xs sm:text-sm text-white/80 truncate">{founder.role}</p>
               </div>
+            </>
+          );
+
+          return (
+            <div // This is the main scaling/opacity/positioning wrapper for each card
+              key={keyId}
+              className={cn(
+                'transition-all duration-500 ease-in-out',
+                'w-[160px] xs:w-[180px] sm:w-[200px] md:w-[220px] lg:w-[260px]', // Sizing classes
+                isActive ? 'opacity-100 scale-100 z-10' : 'opacity-50 scale-90', // Active/inactive visual state
+                isVisible ? 'block' : 'hidden' // Visibility
+              )}
+            >
+              {isActive ? (
+                <div // Wrapper for animated gradient border (active card)
+                  className={cn(
+                    'h-full p-[2px] rounded-lg bg-gradient-to-r from-primary via-purple-500 to-accent animate-border-flow'
+                  )}
+                  style={{ backgroundSize: '400% 400%' }} // Required for the gradient animation
+                >
+                  <div // Actual card content container for active card
+                    className="relative aspect-[9/16] bg-card/60 backdrop-blur-md rounded-md shadow-xl overflow-hidden group h-full"
+                  >
+                    {founderCardInnerContent}
+                  </div>
+                </div>
+              ) : (
+                <div // Card container with static border (inactive cards)
+                  className="relative aspect-[9/16] bg-card/60 backdrop-blur-md rounded-lg border-2 border-primary shadow-xl overflow-hidden group h-full"
+                >
+                  {founderCardInnerContent}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {showArrows && (
@@ -148,3 +174,4 @@ const FounderCarousel: React.FC<FounderCarouselProps> = ({ founders }) => {
 };
 
 export default FounderCarousel;
+
