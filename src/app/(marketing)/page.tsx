@@ -180,7 +180,7 @@ export default function HomePage() {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground text-base sm:text-lg px-8 py-6 sm:py-7 w-full sm:w-auto shadow-lg hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 transition-all duration-300"
+                    className="bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground text-base sm:text-lg px-8 py-6 sm:py-7 w-full sm:w-auto shadow-lg hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-0.5 transition-all duration-300"
                   >
                     <Link href="/#contact">
                       Book a Free Strategy Call
@@ -191,7 +191,7 @@ export default function HomePage() {
                     asChild
                     variant="outline"
                     size="lg"
-                    className="text-base sm:text-lg px-8 py-6 sm:py-7 border-primary-foreground/40 w-full sm:w-auto text-primary-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
+                    className="text-base sm:text-lg px-8 py-6 sm:py-7 border-primary-foreground/40 w-full sm:w-auto text-primary-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300"
                   >
                     <Link href="/ai-content-spark">
                       Explore AI Content Spark
@@ -372,5 +372,7 @@ export default function HomePage() {
     </>
   );
 }
+
+    
 
     

@@ -30,8 +30,6 @@ export default function ShowcaseVideoPlayer({ videoSrc, posterSrc, className }: 
               // Fallback: ensure controls are visible if autoplay fails or unmuting is blocked
               videoElement.muted = true; // Keep muted if unmuting fails
             });
-            // Attempt to unmute, browser might block this without prior user interaction
-            videoElement.muted = false; 
           } else {
             videoElement.pause();
             videoElement.muted = true; // Mute when out of view
@@ -76,3 +74,5 @@ export default function ShowcaseVideoPlayer({ videoSrc, posterSrc, className }: 
     </div>
   );
 }
+
+    
