@@ -212,7 +212,7 @@ export default function HomePage() {
       {/* Showcase Video Section */}
        <section id="showcase-video" className="py-16 md:py-20 lg:py-24">
          <ShowcaseVideoPlayer
-           videoSrc="/videos/Aeternix_SoftLaunch_Landscape.mp4"
+           videoSrc="/videos/Aeternix_Landscape.mp4"
            posterSrc="/videothumbnail.png"
          />
       </section>
