@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, type FC, useEffect } from 'react';
-import { Menu, X, Home, Info, UsersRound, AlertTriangle, Tag, Wand2 } from 'lucide-react'; // Added Wand2
+import { Menu, X, Home, Info, UsersRound, AlertTriangle, Tag, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -19,7 +19,7 @@ const navItems: NavItem[] = [
   { label: 'Team', href: '/#founders-showcase', icon: UsersRound, sectionId: 'founders-showcase' },
   { label: 'Challenges', href: '/#lets-cut-to-the-chase', icon: AlertTriangle, sectionId: 'lets-cut-to-the-chase' },
   { label: 'Pricing', href: '/#pricing', icon: Tag, sectionId: 'pricing' },
-  { label: 'AI Spark', href: '/ai-content-spark', icon: Wand2, sectionId: 'ai-content-spark-page' }, // New Item
+  { label: 'AI Spark', href: '/ai-content-spark', icon: Wand2, sectionId: 'ai-content-spark-page' },
 ];
 
 const Logo: FC = () => (
@@ -35,74 +35,79 @@ const Navbar: FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
-    // Determine if the current page is one of the main nav links (not a hash link)
     const directPageNavItem = navItems.find(item => item.href === pathname && !item.href.includes('#'));
 
     if (directPageNavItem) {
         setActiveSection(directPageNavItem.sectionId);
-        // For direct page links, we don't need the scroll observer logic for homepage sections.
         return; // Exit early, no observer needed for this case
     }
 
-    // Logic for homepage (# links and scroll-based active section)
-    // This will only run if not on a direct page link handled above (e.g., if pathname is '/')
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.4, // Section is active if 40% is visible
+    let observer: IntersectionObserver | undefined;
+    
+    const observerSetupAndRun = () => {
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+
+      const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.4, 
+      };
+
+      const observerCallback = (entries: IntersectionObserverEntry[]) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  const navItem = navItems.find(item => item.sectionId === entry.target.id && item.href.startsWith('/#'));
+                  if (navItem) {
+                      setActiveSection(navItem.sectionId);
+                  }
+              }
+          });
+      };
+
+      observer = new IntersectionObserver(observerCallback, observerOptions);
+      sections.forEach((section) => {
+          if (navItems.some(item => item.sectionId === section.id && item.href.startsWith('/#'))) {
+              observer!.observe(section);
+          }
+      });
+
+      if (pathname === '/') {
+          const currentHash = window.location.hash.substring(1);
+          const navItemForHash = navItems.find(item => item.sectionId === currentHash && item.href.startsWith('/#'));
+
+          if (navItemForHash) {
+              setActiveSection(navItemForHash.sectionId);
+          } else {
+              let foundVisibleSection = false;
+              for (const sectionEl of sections) {
+                  if (navItems.some(item => item.sectionId === sectionEl.id && item.href.startsWith('/#'))) {
+                      const rect = sectionEl.getBoundingClientRect();
+                      if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                          setActiveSection(sectionEl.id);
+                          foundVisibleSection = true;
+                          break;
+                      }
+                  }
+              }
+              if (!foundVisibleSection && sections.length > 0) { // ensure sections exist before defaulting to hero
+                  setActiveSection('hero');
+              } else if (sections.length === 0) {
+                  // If no sections found on homepage (e.g. during initial render flicker), default to hero
+                  setActiveSection('hero');
+              }
+          }
+      }
     };
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                // Check if the intersecting section is a target of a homepage hash link
-                const navItem = navItems.find(item => item.sectionId === entry.target.id && item.href.startsWith('/#'));
-                if (navItem) {
-                    setActiveSection(navItem.sectionId);
-                }
-            }
-        });
+    // Defer the observer setup and initial active section calculation
+    const timeoutId = setTimeout(observerSetupAndRun, 0);
+
+    return () => {
+        clearTimeout(timeoutId);
+        if (observer) {
+            observer.disconnect();
+        }
     };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const sections = document.querySelectorAll('section[id]');
-
-    // Observe only sections that are targets of homepage hash links
-    sections.forEach((section) => {
-        if (navItems.some(item => item.sectionId === section.id && item.href.startsWith('/#'))) {
-            observer.observe(section);
-        }
-    });
-
-    // Initial active section for homepage (hash or first visible) if not a direct page
-    if (pathname === '/') { // Ensure this logic only applies to the homepage
-        const currentHash = window.location.hash.substring(1);
-        const navItemForHash = navItems.find(item => item.sectionId === currentHash && item.href.startsWith('/#'));
-
-        if (navItemForHash) {
-            setActiveSection(navItemForHash.sectionId);
-        } else {
-            // Attempt to find the first visible section among the homepage nav items
-            let foundVisibleSection = false;
-            for (const sectionEl of Array.from(sections)) {
-                // Check if section is a target for a homepage nav link
-                if (navItems.some(item => item.sectionId === sectionEl.id && item.href.startsWith('/#'))) {
-                    const rect = sectionEl.getBoundingClientRect();
-                    if (rect.top >= 0 && rect.top < window.innerHeight / 2) { // Consider section in upper half of viewport
-                        setActiveSection(sectionEl.id);
-                        foundVisibleSection = true;
-                        break;
-                    }
-                }
-            }
-            if (!foundVisibleSection) {
-                setActiveSection('hero'); // Default to hero if no other homepage section is visibly active
-            }
-        }
-    }
-
-
-    return () => sections.forEach((section) => observer.unobserve(section));
   }, [pathname]);
 
 
@@ -121,7 +126,7 @@ const Navbar: FC = () => {
       >
         <div className={cn(
           "flex h-14 sm:h-[60px] items-center justify-center gap-x-6 rounded-full px-6 sm:px-8 shadow-2xl",
-          "bg-neutral-900/80 backdrop-blur-lg"
+          "bg-card/60 backdrop-blur-sm"
         )}>
           <Logo />
 
@@ -167,13 +172,13 @@ const Navbar: FC = () => {
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full max-w-xs bg-neutral-900 p-6 flex flex-col text-neutral-100 border-l border-neutral-700">
+              <SheetContent side="right" className="w-full max-w-xs bg-card/80 backdrop-blur-md p-6 flex flex-col text-neutral-100 border-l border-border/50">
                   <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                   <div className="flex items-center justify-between mb-8">
                     <Logo />
                     <SheetClose asChild>
                        <Button variant="ghost" size="icon" className="text-neutral-300 hover:bg-neutral-700/50">
-                          <X className="h-6 w-6" />
+                          
                           <span className="sr-only">Close menu</span>
                         </Button>
                     </SheetClose>
@@ -217,4 +222,3 @@ const Navbar: FC = () => {
 };
 
 export default Navbar;
-    
