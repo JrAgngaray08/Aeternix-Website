@@ -104,7 +104,7 @@ export default function ContentSparkForm() {
               {errors.keywords && <p className="text-sm text-destructive mt-1">{errors.keywords.message}</p>}
             </div>
             
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button type="submit" disabled={isLoading} className="w-full sm:w-auto">
                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
                 Generate Suggestions
@@ -148,11 +148,10 @@ export default function ContentSparkForm() {
           <div className="mt-10 text-center animate-fade-in-up" style={{animationDelay: '0.2s'}}>
             <Button 
               asChild 
-              size="lg" 
-              className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-6 transition-all duration-300 ease-in-out hover:shadow-accent-glow hover:-translate-y-1"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-md px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium transition-all duration-300 ease-in-out hover:shadow-accent-glow hover:-translate-y-1 w-full sm:w-auto"
             >
-              <Link href="/contact?interest=content_strategy_assistance">
-                Learn How Aeternix Helps Businesses with Content
+              <Link href="https://cal.com/aeternix/strategy-call-30-minutes-discovery-call" target="_blank" rel="noopener noreferrer">
+                Book a Call to Discuss Content
               </Link>
             </Button>
           </div>
